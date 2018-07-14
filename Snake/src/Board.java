@@ -4,11 +4,13 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -28,7 +30,7 @@ public class Board extends JPanel implements ActionListener{
 	private int dots;
 	private int apple_x;
 	private int apple_y;
-	private int dotsplayer1;
+
 	
 	private boolean leftDirection = false;
 	private boolean rightDirection = true;
@@ -101,17 +103,14 @@ private void doDrawing(Graphics g) {
 		for (int z = 0; z < dots; z++) {
 			if (z == 0) {
 				g.drawImage(head, x[z], y[z], this);
-				Player1Score(g);
 			} else {
 				//load alternating
 				
 				if(!isGreen){
 				g.drawImage(bodygreen,  x[z],  y[z],  this);
-				Player1Score(g);
 				isGreen = true;
 				}else if(isGreen) {
 					g.drawImage(bodyYellow, x[z], y[z], this);
-					Player1Score(g);
 					isGreen = false;
 				}
 			}
@@ -167,15 +166,6 @@ private void move() {
 		y[0] += DOT_SIZE;
 	}
 }
-private void Player1Score(Graphics g){
-	int player1score = dotsplayer1 - 3;
-	String Player1Score = Integer.toString(player1score);
-	Font small = new Font("Helvetica", Font.BOLD, 9);
-	FontMetrics met = getFontMetrics(small);
-	g.setColor(Color.MAGENTA);
-	g.setFont(small);
-	g.drawString(Player1Score, (B_WIDTH - met.stringWidth(Player1Score)) / 5, B_HEIGHT / 5 );}
-
 private void checkCollision() {
 	
 	for (int z = dots; z > 0; z--) {

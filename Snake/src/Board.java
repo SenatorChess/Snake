@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -22,7 +23,7 @@ public class Board extends JPanel implements ActionListener{
 	private final int DOT_SIZE = 10;
 	private final int ALL_DOTS = B_WIDTH * B_HEIGHT / DOT_SIZE * DOT_SIZE;
 	private final int RAND_POS = 59;
-	private final int DELAY = 75;
+	private int delay = 75;
 	
 	private final int x[] = new int[ALL_DOTS];
 	private final int y[] = new int[ALL_DOTS];
@@ -45,6 +46,8 @@ public class Board extends JPanel implements ActionListener{
 	private Image bodyYellow;
 	boolean isGreen = false;
 	Music music = new Music();
+	private int score;
+	private JLabel scoreLabel = new JLabel();
 	
 	
 	public Board() {
@@ -87,10 +90,11 @@ private void initGame() {
 		x[z] = 50 - z * 10;
 		y[z] = 50;
 	}
-	
+	add(scoreLabel);
+	scoreLabel.setText("<html><font color='red'>" + "Score: " + score + "</font></html>");
 	locateApple();
 	
-	timer = new Timer(DELAY, this);
+	timer = new Timer(delay, this);
 	timer.start();
 }
 @Override
@@ -145,6 +149,12 @@ private void checkApple() {
 		
 		dots++;
 		locateApple();
+		dots++;
+		score++;
+		if (delay > 5) {
+			timer.setDelay(delay = delay - 5);
+		}
+		scoreLabel.setText("<html><font color='red'>" + "Score: " + score + "</font></html>");
 	}
 }
 

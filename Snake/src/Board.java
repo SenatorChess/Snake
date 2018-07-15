@@ -4,17 +4,17 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import sound.Music;
 
 public class Board extends JPanel implements ActionListener{
 	private final int B_WIDTH = 600;
@@ -44,6 +44,9 @@ public class Board extends JPanel implements ActionListener{
 	private Image head;
 	private Image bodyYellow;
 	boolean isGreen = false;
+	Music music = new Music();
+	
+	
 	public Board() {
 	
 		initBoard();
@@ -133,6 +136,7 @@ private void gameOver(Graphics g) {
 	g.setColor(Color.white);
 	g.setFont(small);
 	g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+	music.start();
 }
 
 private void checkApple() {

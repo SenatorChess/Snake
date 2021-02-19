@@ -112,10 +112,9 @@ private void doDrawing(Graphics g) {
 				g.drawImage(head, x[z], y[z], this);
 			} else {
 				//load alternating
-				
 				if(!isGreen){
-				g.drawImage(bodygreen,  x[z],  y[z],  this);
-				isGreen = true;
+					g.drawImage(bodygreen,  x[z],  y[z],  this);
+					isGreen = true;
 				}else if(isGreen) {
 					g.drawImage(bodyYellow, x[z], y[z], this);
 					isGreen = false;
